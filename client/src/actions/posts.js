@@ -21,10 +21,30 @@ export const createPost = (post) => async(dispatch) => {
     }
 }
 
-export const updatePost = (Id, post) => async(dispatch) => {
+export const updatePost = (id, post) => async(dispatch) => {
     try {
-        const {data} = await api.updatePost(Id, post);
+        const {data} = await api.updatePost(id, post);
         return dispatch({ type: 'UPDATE', payload: data})   
+
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+export const deletePost = (id) => async(dispatch) => {
+    try {
+        await api.deletePost(id);
+        return dispatch({ type: 'DELETE', payload: id})   
+
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+export const likePost = (id) => async(dispatch) => {
+    try {
+        const {data} = await api.likePost(id);
+        return dispatch({ type: 'LIKE_POST', payload: data})   
 
     } catch (error) {
         console.log(error.message)
